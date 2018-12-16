@@ -14,13 +14,10 @@ def get_features(image,model,layers=None):
     features = {}
             
     x = image
-    #print(x)
     for name,layer in model._modules.items():
         x = layer(x)
-        #print(name)
         if name in layers:
             features[layers[name]] = x
-    #print(features)
     return features
         
 def gram_matrix(tensor):
@@ -70,8 +67,6 @@ class StyleCNN():
         def closure():
             self.optimizer.zero_grad()
             targetFeatures = get_features(self.target,self.model)
-            #print(targetFeatures)
-            #print(self.contentFeatures)
             contentLoss = torch.mean((targetFeatures["conv4_2"] - self.contentFeatures["conv4_2"])**2)
             
             styleLoss = 0
