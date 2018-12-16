@@ -79,7 +79,6 @@ def main():
             print("Iteration: %d" % (i))
             
             path = "outputs/%d.png" % (i)
-            #target.data.clamp_(0, 1)
             save_image(target, path)
     
     
